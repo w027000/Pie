@@ -1,19 +1,38 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.pie"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        appkey {
+            keyAlias 'pie'
+            keyPassword 'android12345'
+            storeFile file('../pie.jks')
+            storePassword 'android12345'
+        }
+    }
+
+
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.appkey
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.appkey
         }
     }
 }
