@@ -1,4 +1,4 @@
-package com.pie.app;
+package com.pie.core.app;
 
 import android.support.multidex.MultiDexApplication;
 

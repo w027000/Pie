@@ -1,7 +1,7 @@
 package com.pie;
 
-import com.pie.app.Pie;
-import com.pie.app.PieApplication;
+import com.pie.core.app.Pie;
+import com.pie.core.app.PieApplication;
 
 public class MyApplication extends PieApplication{
 
@@ -10,6 +10,7 @@ public class MyApplication extends PieApplication{
         Pie.doConfigurator()
                 .withApplication(this)
                 .withApiHost("http://www.baidu.com")
+                .withLogger("pie",true)
                 .configure();
     }
 }

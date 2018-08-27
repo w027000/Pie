@@ -1,4 +1,4 @@
-package com.pie.app;
+package com.pie.core.app;
 
 public enum  ConfigKeys {
 

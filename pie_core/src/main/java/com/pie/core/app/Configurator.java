@@ -1,9 +1,12 @@
-package com.pie.app;
+package com.pie.core.app;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
 import java.util.HashMap;
 
@@ -22,10 +25,9 @@ public final class Configurator {
     }
 
     public final void configure() {
-        Logger.addLogAdapter(new AndroidLogAdapter());
         PIE_CONFIGS.put(ConfigKeys.KEY_CONFIG_READY_OK,true);
+        initLogger();
     }
-
 
     private static class ConfigHolder{
 
@@ -54,7 +56,9 @@ public final class Configurator {
 
     /**配置全局log信息*/
     public Configurator withLogger(String tag,boolean isShow){
-        PIE_CONFIGS.put()
+        PIE_CONFIGS.put(ConfigKeys.KEY_LOGGER_TAG,tag);
+        PIE_CONFIGS.put(ConfigKeys.KEY_LOGGER_VISIBLE,isShow);
+        return this;
     }
 
 
@@ -75,5 +79,20 @@ public final class Configurator {
         }
     }
 
+    /**初始化logger*/
+    private void initLogger(){
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)                                                             // (Optional) Whether to show thread info or not. Default true
+                .methodCount(0)                                                                    // (Optional) How many method line to show. Default 2
+                .methodOffset(7)                                                                   // (Optional) Hides internal method calls up to offset. Default 5
+                .tag(String.valueOf(getConfigurationValue(ConfigKeys.KEY_LOGGER_TAG)))             // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy){
+            @Override
+            public boolean isLoggable(int priority, @Nullable String tag) {
+                return getConfigurationValue(ConfigKeys.KEY_LOGGER_VISIBLE);
+            }
+        });
+    }
 
 }

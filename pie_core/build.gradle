@@ -23,8 +23,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api 'com.android.support:appcompat-v7:28.0.0-rc01'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -33,4 +32,11 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.1'
     //添加 logger 依赖
     implementation 'com.orhanobut:logger:2.2.0'
+    //添加 butterknife 依赖
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //添加  retrofit  依赖
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    //添加  rxjava2  依赖
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.1'
 }

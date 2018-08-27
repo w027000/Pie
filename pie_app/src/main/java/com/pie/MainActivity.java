@@ -3,9 +3,8 @@ package com.pie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.pie.app.ConfigKeys;
-import com.pie.app.Pie;
-import com.pie.util.log.PLog;
+import com.pie.core.app.ConfigKeys;
+import com.pie.core.app.Pie;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,13 +12,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        String host = Pie.getConfigurationValue(ConfigKeys.KEY_API_HOST);
-
-        PLog.i("TAG","11111");
-        PLog.d("TAG","11111");
-        PLog.e("TAG","11111");
-        PLog.w("TAG","11111");
     }
 }
