@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
+import okhttp3.ResponseBody;
 
 /**
  * @author:zjh
@@ -25,12 +26,14 @@ public final class GetRequest extends BaseHttpRequest<GetRequest>{
 
     @Override
     protected <T> Observable<T> execute(Type type) {
-        return mApiService.get(mUrl,mHttpParams.getParams()).compose(this.<T>noTransformer(type));
+        Observable<ResponseBody> observable = mApiService.get(mUrl,mHttpParams.getParams());
+        return observable.compose(this.<T>noTransformer(type));
     }
 
     @Override
     protected <T> Observable<CacheResult<T>> cacheExecute(Type type) {
-        return this.<T>execute(type).compose(PiHttpCreator.getCacheManage().<T>transformer(mCacheMode, type));
+        Observable<T> observable = execute(type);
+        return observable.compose(PiHttpCreator.getCacheManage().<T>transformer(mCacheMode, type));
     }
 
     @Override
