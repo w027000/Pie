@@ -39,10 +39,17 @@ public final class GetRequest extends BaseHttpRequest<GetRequest>{
         if (mTag != null){
             RequestManage.getInstance().add(mTag,disposableObserver);
         }
+
+        Observable<CacheResult<T>> cacheResultObservable;
+        Type type;
         if (mIsLocalCache){
-            cacheExecute(getSubType(callback)).subscribe(disposableObserver);
+            type = getSubType(callback);
+            cacheResultObservable = cacheExecute(type);
+            cacheResultObservable.subscribe(disposableObserver);
         } else {
-            execute(getType(callback)).subscribe(disposableObserver);
+            type = getType(callback);
+            cacheResultObservable = execute(type);
+            cacheResultObservable.subscribe(disposableObserver);
         }
 
     }
