@@ -1,4 +1,4 @@
-package com.pie.core.util.dimen;
+package com.pie.core.util.system;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
