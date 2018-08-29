@@ -10,7 +10,7 @@ import io.reactivex.annotations.NonNull;
  * @date:2018/8/27
  * @Description：包含回调的订阅者，如果订阅这个，上层在不使用订阅者的情况下可获得回调
  */
-public class ApiCallbackSubscriber<T> extends ApiSubscriber{
+public class ApiCallbackSubscriber<T> extends ApiSubscriber<T> {
 
     private ICallback<T> mCallBack;
     private T mData;
@@ -29,8 +29,9 @@ public class ApiCallbackSubscriber<T> extends ApiSubscriber{
     }
 
     @Override
-    public void onNext(Object o) {
-
+    public void onNext(T t) {
+        this.mData = t;
+        mCallBack.onSuccess(t);
     }
 
     @Override

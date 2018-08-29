@@ -2,6 +2,8 @@ package com.pie.core.net.model;
 
 import android.text.TextUtils;
 
+import com.pie.core.util.log.PLog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,7 +22,6 @@ import java.util.TimeZone;
  * @date:2018/8/27
  * @Description：请求头封装
  */
-@SuppressWarnings("")
 public class HttpHeaders implements Serializable {
 
     private static final String FORMAT_HTTP_DATA = "EEE, dd MMM y HH:mm:ss 'GMT'";
@@ -113,7 +114,7 @@ public class HttpHeaders implements Serializable {
                 jsonObject.put(entry.getKey(), entry.getValue());
             }
         } catch (JSONException e) {
-            com.pie.util.log.PLog.e(e.getMessage());
+            PLog.e(e.getMessage());
         }
         return jsonObject.toString();
     }

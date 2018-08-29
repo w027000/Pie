@@ -1,15 +1,10 @@
 package com.pie.core.net.request;
 
-import com.pie.core.net.config.HttpConfigurator;
 import com.pie.core.net.model.HttpHeaders;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Map;
-
-import okhttp3.Interceptor;
-import retrofit2.Retrofit;
-import retrofit2.http.Url;
 
 /**
  * @author:zjh
@@ -18,18 +13,9 @@ import retrofit2.http.Url;
  */
 public abstract class BaseRequest <T extends BaseRequest>{
 
-    protected HttpConfigurator mHttpConfigurator;//全局配置
-    protected Retrofit mRetrofit;//Retrofit对象
     protected HttpHeaders mHeaders = new HttpHeaders();//请求头
     protected String mBaseUrl;//基础域名
     protected Object mTag;//请求标签
-    protected long mReadTimeOut;//读取超时时间
-    protected long mWriteTimeOut;//写入超时时间
-    protected long mConnectTimeOut;//连接超时时间
-    protected boolean mIsHttpCache;//是否使用Http缓存
-
-    protected List<Interceptor> mRequestInterceptors = new ArrayList<>();//局部请求的拦截器
-
 
     public T withBaseUrl(String url){
         mBaseUrl = url;
@@ -57,27 +43,50 @@ public abstract class BaseRequest <T extends BaseRequest>{
         return (T) this;
     }
 
-    public T withWriteTimeOut(int writeTimeOut) {
-        this.mWriteTimeOut = writeTimeOut;
-        return (T) this;
+
+    /**
+     * 获取第一级type
+     * @param t
+     * @param <T>
+     * @return
+     */
+    protected <T> Type getType(T t) {
+        Type genType = t.getClass().getGenericSuperclass();
+        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+        Type type = params[0];
+        Type finalNeedType;
+        if (params.length > 1) {
+            if (!(type instanceof ParameterizedType)) throw new IllegalStateException("没有填写泛型参数");
+            finalNeedType = ((ParameterizedType) type).getActualTypeArguments()[0];
+        } else {
+            finalNeedType = type;
+        }
+        return finalNeedType;
     }
 
-    public T withConnectTimeOut(int connectTimeOut) {
-        this.mConnectTimeOut = connectTimeOut;
-        return (T) this;
+    /**
+     * 获取次一级type(如果有)
+     * @param t
+     * @param <T>
+     * @return
+     */
+    protected <T> Type getSubType(T t) {
+        Type genType = t.getClass().getGenericSuperclass();
+        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+        Type type = params[0];
+        Type finalNeedType;
+        if (params.length > 1) {
+            if (!(type instanceof ParameterizedType)) throw new IllegalStateException("没有填写泛型参数");
+            finalNeedType = ((ParameterizedType) type).getActualTypeArguments()[0];
+        } else {
+            if (type instanceof ParameterizedType) {
+                finalNeedType = ((ParameterizedType) type).getActualTypeArguments()[0];
+            } else {
+                finalNeedType = type;
+            }
+        }
+        return finalNeedType;
     }
-
-    public T withReadTimeOut(int readTimeOut) {
-        this.mReadTimeOut = readTimeOut;
-        return (T) this;
-    }
-
-    public T withIsHttpCache(boolean isHttpCache) {
-        this.mIsHttpCache = isHttpCache;
-        return (T) this;
-    }
-
-
 
 
 

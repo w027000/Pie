@@ -10,7 +10,7 @@ import io.reactivex.observers.DisposableObserver;
  * @date:2018/8/27
  * @Description：API统一订阅者
  */
-public abstract class ApiSubscriber extends DisposableObserver {
+public abstract class ApiSubscriber<T>  extends DisposableObserver<T>  {
 
     @Override
     public void onError(Throwable e) {

@@ -5,13 +5,13 @@ package com.pie.core.net.callback;
  * @date:2018/8/27
  * @Description：请求接口回调
  */
-public interface ICallback<T> {
+public abstract class ICallback<T> {
 
     /**
      * 请求成功回调
      * @param data
      */
-    void onSuccess(T data);
+    public abstract void onSuccess(T data);
 
 
     /***
@@ -19,6 +19,6 @@ public interface ICallback<T> {
      * @param code
      * @param msg
      */
-    void onFail(int code, String msg);
+    public abstract void onFail(int code, String msg);
 
 }

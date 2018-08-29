@@ -1,5 +1,7 @@
 package com.pie.core.net;
 
+import com.pie.core.net.request.GetRequest;
+
 /**
  * @author:zjh
  * @date:2018/8/27
@@ -7,10 +9,16 @@ package com.pie.core.net;
  */
 public final class PieHttpClient {
 
-
-    public static void init(){
+    private PieHttpClient(){
     }
 
+    /**
+     * Get请求
+     * @return
+     */
+    public static GetRequest get(String url){
+        return new GetRequest(url);
+    }
 
 
 }
