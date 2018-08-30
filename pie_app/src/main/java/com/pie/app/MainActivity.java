@@ -9,6 +9,7 @@ import com.pie.R;
 import com.pie.core.net.PieHttpClient;
 import com.pie.core.net.callback.ICallback;
 import com.pie.core.net.model.CacheMode;
+import com.pie.core.net.model.CacheResult;
 import com.pie.core.util.log.PLog;
 import com.pie.core.util.system.AppUtil;
 import com.pie.model.RootBean;
@@ -53,17 +54,56 @@ public class MainActivity extends AppCompatActivity {
                 .withTag("get1")
                 .withLocalCache(true)
                 .withCacheMode(CacheMode.CACHE_MODE_FIRST_CACHE)
-                .request(new ICallback<RootBean>() {
+                .request(new ICallback<CacheResult<RootBean>>() {
                     @Override
-                    public void onSuccess(RootBean data) {
+                    public void onSuccess(CacheResult<RootBean> data) {
                         PLog.i("onSuccess data--->" + data);
-                        mTv.setText(data.toString());
+                        mTv.setText(data.getCacheData().toString());
                     }
 
                     @Override
                     public void onFail(int code, String msg) {
-                        mTv.setText("onFail--" + code + "  msg-" + msg);
-                        PLog.i("onFail code--->" + code + "  , msg=" + msg);
+                    }
+                });
+    }
+
+
+    //网络优先
+    public void doGet_2(View view) {
+        PieHttpClient
+                .get("/toutiao/index?type=top&key=279fb51b85d7a24ed7e58c8b27073fa6")
+                .withTag("get2")
+                .withLocalCache(true)
+                .withCacheMode(CacheMode.CACHE_MODE_FIRST_REMOTE)
+                .request(new ICallback<CacheResult<RootBean>>() {
+                    @Override
+                    public void onSuccess(CacheResult<RootBean> data) {
+                        PLog.i("onSuccess data--->" + data);
+                        mTv.setText(data.getCacheData().toString());
+                    }
+
+                    @Override
+                    public void onFail(int code, String msg) {
+                    }
+                });
+    }
+
+    //只加载缓存
+    public void doGet_3(View view) {
+        PieHttpClient
+                .get("/toutiao/index?type=top&key=279fb51b85d7a24ed7e58c8b27073fa6")
+                .withTag("get3")
+                .withLocalCache(true)
+                .withCacheMode(CacheMode.CACHE_MODE_ONLY_CACHE)
+                .request(new ICallback<CacheResult<RootBean>>() {
+                    @Override
+                    public void onSuccess(CacheResult<RootBean> data) {
+                        PLog.i("onSuccess data--->" + data);
+                        mTv.setText(data.getCacheData().toString());
+                    }
+
+                    @Override
+                    public void onFail(int code, String msg) {
                     }
                 });
     }

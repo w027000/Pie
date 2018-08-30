@@ -36,22 +36,21 @@ public final class GetRequest extends BaseHttpRequest<GetRequest>{
         return observable.compose(PiHttpCreator.getCacheManage().<T>transformer(mCacheMode, type));
     }
 
+
     @Override
     protected <T> void execute(ICallback<T> callback) {
         DisposableObserver disposableObserver = new ApiCallbackSubscriber(callback);
         if (mTag != null){
             RequestManage.getInstance().add(mTag,disposableObserver);
         }
-
-        Observable<CacheResult<T>> cacheResultObservable;
         Type type;
-        if (mIsLocalCache){
-            type = getSubType(callback);
-            cacheResultObservable = cacheExecute(type);
-            cacheResultObservable.subscribe(disposableObserver);
-        } else {
+        if (!mIsLocalCache){
             type = getType(callback);
-            cacheResultObservable = execute(type);
+            Observable<CacheResult<T>> resultObservable = execute(type);
+            resultObservable.subscribe(disposableObserver);
+        }else{
+            type = getSubType(callback);
+            Observable<CacheResult<T>> cacheResultObservable = cacheExecute(type);
             cacheResultObservable.subscribe(disposableObserver);
         }
 

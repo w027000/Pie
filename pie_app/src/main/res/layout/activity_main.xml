@@ -14,14 +14,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="doGet_0"
-            android:text="Get不带缓存" />
+            android:text="Get直接请求网络" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="doGet_1"
-            android:text="Get缓存优先" />
-
+            android:text="Get先加载缓存，缓存没有再去请求网络" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="doGet_2"
+            android:text="Get先请求网络，请求网络失败后再加载缓存" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="doGet_3"
+            android:text="Get只加载缓存" />
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"
