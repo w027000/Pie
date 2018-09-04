@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTv = findViewById(R.id.tv);
-        PLog.i("version code-->" + AppUtil.getVersionCode(this));
-        PLog.i("ExternalCacheDir-->" + getExternalCacheDir().getPath() );
-        PLog.i("CacheDir-->" + getCacheDir().getPath() );
+//        PLog.i("version code-->" + AppUtil.getVersionCode(this));
+//        PLog.i("ExternalCacheDir-->" + getExternalCacheDir().getPath() );
+//        PLog.i("CacheDir-->" + getCacheDir().getPath() );
     }
 
 
@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
                 .request(new ICallback<RootBean>() {
                     @Override
                     public void onSuccess(RootBean data) {
-                        PLog.i("onSuccess data--->" + data);
+                        //PLog.i("onSuccess data--->" + data);
                         mTv.setText(data.toString());
                     }
 
                     @Override
                     public void onFail(int code, String msg) {
-                        PLog.i("onFail code--->" + code + "  , msg=" + msg);
+                        //PLog.i("onFail code--->" + code + "  , msg=" + msg);
                     }
                 });
     }
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 .request(new ICallback<CacheResult<RootBean>>() {
                     @Override
                     public void onSuccess(CacheResult<RootBean> data) {
-                        PLog.i("onSuccess data--->" + data);
+                        //PLog.i("onSuccess data--->" + data);
                         mTv.setText(data.getCacheData().toString());
                     }
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .request(new ICallback<CacheResult<RootBean>>() {
                     @Override
                     public void onSuccess(CacheResult<RootBean> data) {
-                        PLog.i("onSuccess data--->" + data);
+                        //PLog.i("onSuccess data--->" + data);
                         mTv.setText(data.getCacheData().toString());
                     }
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 .request(new ICallback<CacheResult<RootBean>>() {
                     @Override
                     public void onSuccess(CacheResult<RootBean> data) {
-                        PLog.i("onSuccess data--->" + data);
+                        //PLog.i("onSuccess data--->" + data);
                         mTv.setText(data.getCacheData().toString());
                     }
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 .request(new ICallback<CacheResult<RootBean>>() {
                     @Override
                     public void onSuccess(CacheResult<RootBean> data) {
-                        PLog.i("onSuccess data--->" + data);
+                        //PLog.i("onSuccess data--->" + data);
                         mTv.setText(data.getCacheData().toString());
                     }
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(RootBean data) {
-                        PLog.i("onSuccess data--->" + data);
+                       // PLog.i("onSuccess data--->" + data);
                         mTv.setText(data.toString());
                     }
 

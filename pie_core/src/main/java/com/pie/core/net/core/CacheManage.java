@@ -71,7 +71,6 @@ public class CacheManage {
         return new ObservableTransformer<T, CacheResult<T>>() {
             @Override
             public ObservableSource<CacheResult<T>> apply(Observable<T> apiResultObservable) {
-                PLog.i("cacheKey=" + CacheManage.this.cacheKey);
                 return strategy.execute(CacheManage.this, CacheManage.this.cacheKey, apiResultObservable, type);
             }
         };

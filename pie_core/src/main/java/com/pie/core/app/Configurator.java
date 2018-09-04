@@ -7,6 +7,8 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.pie.core.net.config.HttpDefaultConfigs;
+import com.pie.core.net.interceptors.HttpLogInterceptor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +34,15 @@ public final class Configurator {
     public final void configure() {
         PIE_CONFIGS.put(ConfigKeys.KEY_CONFIG_READY_OK,true);
         initLogger();
+        initDefaultHttp();
+    }
+
+    private void initDefaultHttp() {
+        withHttpDefaultMilliseconds(HttpDefaultConfigs.HTTP_DEFAULT_CONNECT_TIME);
+        withHttpRetryCount(HttpDefaultConfigs.HTTP_DEFAULT_RETRY_COUNT);
+        withHttpInterceptor(new HttpLogInterceptor());
+        withHttpCacheNeverExpire(HttpDefaultConfigs.HTTP_DEFAULT_CACHE_NEVER_EXPIRE);
+        withHttpCacheKey(HttpDefaultConfigs.HTTP_DEFAULT_CACHE_KEY);
     }
 
     private static class ConfigHolder{
