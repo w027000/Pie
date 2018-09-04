@@ -1,6 +1,7 @@
 package com.pie.core.net;
 
 import com.pie.core.net.request.GetRequest;
+import com.pie.core.net.request.PostRequest;
 
 /**
  * @author:zjh
@@ -14,11 +15,23 @@ public final class PieHttpClient {
 
     /**
      * Get请求
+     * @param url
      * @return
      */
     public static GetRequest get(String url){
         return new GetRequest(url);
     }
+
+
+    /**
+     * Post请求
+     * @param url
+     * @return
+     */
+    public static PostRequest post(String url){
+        return new PostRequest(url);
+    }
+
 
 
 }

@@ -67,7 +67,7 @@ public class PHttpException extends Exception{
             return ex;
         }else{
             ex = new PHttpException(throwable, HttpCode.Request.UNKNOWN);
-            ex.message = "UNKNOWN";
+            ex.message = "UNKNOWN:" + throwable.getMessage();
             return ex;
         }
     }

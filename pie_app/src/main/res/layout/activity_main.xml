@@ -9,7 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="doGet_test"
+            android:text="Test" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,6 +35,16 @@
             android:layout_height="wrap_content"
             android:onClick="doGet_3"
             android:text="Get只加载缓存" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="doGet_4"
+            android:text="Get仅加载网络，但数据依然会被缓存" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="doPost_1"
+            android:text="post正常提交" />
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"

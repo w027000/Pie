@@ -36,7 +36,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST()
-    Observable<ResponseBody> post(@Url() String url, @FieldMap Map<String, String> maps);
+    Observable<ResponseBody> post(@Url() String url, @FieldMap Map<String, Object> maps);
 
     @FormUrlEncoded
     @POST()

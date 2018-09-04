@@ -28,7 +28,7 @@ import okio.Buffer;
 public class HttpLogInterceptor extends BaseInterceptor{
 
     private static final Charset UTF8 = Charset.forName("UTF-8");
-    private volatile Level level = Level.BODY;
+    private volatile Level level = Level.BASIC;
     private StringBuilder showMessage = new StringBuilder();
 
     public enum Level {
