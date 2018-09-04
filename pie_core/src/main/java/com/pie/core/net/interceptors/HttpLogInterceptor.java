@@ -1,8 +1,10 @@
 package com.pie.core.net.interceptors;
 
 
+import com.alibaba.fastjson.JSON;
 import com.pie.core.net.model.HttpMethod;
 import com.pie.core.util.log.PLog;
+import com.pie.core.util.strings.JsonUtil;
 
 import java.io.IOException;
 
@@ -39,7 +41,13 @@ public class HttpLogInterceptor extends BaseInterceptor{
             PLog.i("get url = " + request.url());
         }
         Response response = chain.proceed(request);
-        PLog.json(response.body().string());
+        String json = response.body().string();
+        boolean isJson = JsonUtil.isJSONValid2(json);
+        if (isJson){
+            PLog.json(json);
+        }else {
+            PLog.i(json);
+        }
         return response;
     }
 }
