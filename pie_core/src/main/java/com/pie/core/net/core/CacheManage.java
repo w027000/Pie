@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.pie.core.app.ConfigKeys;
 import com.pie.core.app.Pie;
-import com.pie.core.cache.DiskCache;
+import com.pie.core.net.cache.DiskCache;
 import com.pie.core.net.model.CacheMode;
 import com.pie.core.net.model.CacheResult;
 import com.pie.core.net.strategy.ICacheStrategy;

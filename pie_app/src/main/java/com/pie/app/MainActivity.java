@@ -13,6 +13,7 @@ import com.pie.core.net.model.CacheMode;
 import com.pie.core.net.model.CacheResult;
 import com.pie.core.util.log.PLog;
 import com.pie.core.util.system.AppUtil;
+import com.pie.core.util.system.SDCardUtils;
 import com.pie.model.RootBean;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 //        PLog.i("version code-->" + AppUtil.getVersionCode(this));
 //        PLog.i("ExternalCacheDir-->" + getExternalCacheDir().getPath() );
 //        PLog.i("CacheDir-->" + getCacheDir().getPath() );
+
+        PLog.i("-->" + SDCardUtils.getDiskCacheDir(this,"zjh").getAbsolutePath() );
+
     }
 
 
@@ -161,4 +165,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

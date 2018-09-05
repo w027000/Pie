@@ -1,4 +1,4 @@
-package com.pie.core.cache;
+package com.pie.core.net.cache;
 
 import android.content.Context;
 import android.os.Environment;
@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.jakewharton.disklrucache.DiskLruCache;
 import com.pie.core.util.cipher.MD5;
 import com.pie.core.util.system.AppUtil;
+import com.pie.core.util.system.SDCardUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class DiskCache implements ICache{
     private long cacheTime = CACHE_NEVER_EXPIRE;
 
     public DiskCache(Context context) {
-        this(context, getDiskCacheDir(context, CACHE_DISK_DIR), calculateDiskCacheSize(getDiskCacheDir(context, CACHE_DISK_DIR)));
+        this(context, SDCardUtils.getDiskCacheDir(context, CACHE_DISK_DIR), calculateDiskCacheSize(SDCardUtils.getDiskCacheDir(context, CACHE_DISK_DIR)));
     }
 
     public DiskCache(Context context, File diskDir, long diskMaxSize) {
@@ -146,17 +147,6 @@ public class DiskCache implements ICache{
         return MD5.getMessageDigest(key.getBytes());
     }
 
-    private static File getDiskCacheDir(Context context, String dirName) {
-        String cachePath;
-        if ((Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable())
-                && context.getExternalCacheDir() != null) {
-            cachePath = context.getExternalCacheDir().getPath();
-        } else {
-            cachePath = context.getCacheDir().getPath();
-        }
-        return new File(cachePath + File.separator + dirName);
-    }
 
     private static long calculateDiskCacheSize(File dir) {
         long size = 0;

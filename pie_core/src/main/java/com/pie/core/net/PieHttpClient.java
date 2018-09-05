@@ -2,6 +2,7 @@ package com.pie.core.net;
 
 import com.pie.core.net.request.GetRequest;
 import com.pie.core.net.request.PostRequest;
+import com.pie.core.net.request.UpdateRequest;
 
 /**
  * @author:zjh
@@ -31,6 +32,15 @@ public final class PieHttpClient {
     public static PostRequest post(String url){
         return new PostRequest(url);
     }
+
+    /**
+     * 下载更新包
+     * @return
+     */
+    public static UpdateRequest update(String url){
+        return new UpdateRequest(url);
+    }
+
 
 
 
